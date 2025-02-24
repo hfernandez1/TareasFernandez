@@ -14,23 +14,31 @@ def separa_letras(cadena):
     Retorna:
         tuple: (código de estado, string de mayúsculas, string de minúsculas).
     """
+    # Verifica si la entrada no es un string
     if not isinstance(cadena, str):
-        return -100, None, None  # Código de error: No es un string válido
+        return -100, None, None  # Error: No es un string válido
 
+    # Verifica si la cadena está vacía
     if cadena == "":
-        return -300, None, None  # Código de error: String vacío
+        return -300, None, None  # Error: String vacío
 
+    # Verifica si la cadena contiene caracteres que no son letras
     if not cadena.isalpha():
-        return -200, None, None  # Código de error: Caracter no del abecedario
+        return -200, None, None  # Error: Caracter fuera del abecedario
 
+    # Extrae todas las letras mayúsculas en un solo string
     mayusculas = "".join(
         c for c in cadena if c.isupper()
     )
+
+    # Extrae todas las letras minúsculas en un solo string
     minusculas = "".join(
         c for c in cadena if c.islower()
     )
 
-    return 0, mayusculas, minusculas  # Código de éxito 0
+    # Retorna el código de éxito 0
+    # Retorna las cadenas de mayúsculas y minúsculas
+    return 0, mayusculas, minusculas
 
 
 def potencia_manual(base, potencia):
@@ -46,20 +54,27 @@ def potencia_manual(base, potencia):
     Retorna:
         tuple: (código de estado, resultado de la operación).
     """
+    # Verifica si los parámetros de entrada son enteros
     if not isinstance(base, int) or not isinstance(potencia, int):
-        return -400, None  # Código de error: Parámetro no es un entero
+        return -400, None  # Error: Parámetro no es un entero
 
+    # Caso especial: cualquier número elevado a 0 es 1
     if potencia == 0:
-        return 0, 1  # Código de éxito: Cualquier número elevado a 0 es 1
+        return 0, 1  # Código de éxito 0
 
+    # No se permite calcular potencias negativas en esta función
     if potencia < 0:
-        return -400, None  # Código de error: No se pueden exponentes negativos
+        return -400, None  # Error: No se aceptan exponentes negativos
 
+    # Inicializa el resultado en 1 (ya que cualquier número elevado a 0 es 1)
     resultado = 1
-    for _ in range(potencia):
-        suma = 0
-        for _ in range(base):
-            suma += resultado
-        resultado = suma
 
-    return 0, resultado  # Código de éxito 0
+    # Calcula la potencia manualmente usando sumas
+    for _ in range(potencia):  # Itera tantas veces como el exponente indique
+        suma = 0
+        for _ in range(base):  # Realiza sumas sucesivas
+            suma += resultado
+        resultado = suma  # Actualiza el resultado con la nueva suma acumulada
+
+    # Retorna el código de éxito y el resultado de la potencia
+    return 0, resultado
